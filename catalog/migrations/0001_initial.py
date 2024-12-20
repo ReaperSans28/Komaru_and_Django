@@ -109,7 +109,7 @@ class Migration(migrations.Migration):
                         help_text="Введите описание товара",
                         null=True,
                         on_delete=django.db.models.deletion.SET_NULL,
-                        related_name="products",
+                        related_name="catalog",
                         to="catalog.category",
                         verbose_name="Описание",
                     ),

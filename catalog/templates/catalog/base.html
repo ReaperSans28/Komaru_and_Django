@@ -166,7 +166,7 @@
 
 
 <header data-bs-theme="dark">
-{% include 'includes/inc_menu.html' %}
+{% include 'catalog/includes/inc_menu.html' %}
 </header>
 
 <main>
@@ -176,6 +176,7 @@
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">KKKmerch</h1>
         <p class="lead text-body-secondary">Магазин с мерчом Комару и другим кошкам из сообщества ККК.</p>
+        <a class="btn btn-primary" href="{% url 'catalog:products_create'%}" role="button">Create</a>
         <p>
           <a href="https://www.piokok.com/profile/mugimeshi323/" class="btn btn-primary my-2">Ссылка на хозяйку Комару</a>
           <a href="https://t.me/reapersans28" class="btn btn-secondary my-2">Комару</a>

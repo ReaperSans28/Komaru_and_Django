@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'catalog/base.html' %}
 {% load my_tags %}
 {% block content %}
 <div class="album py-5 bg-body-tertiary">
@@ -8,12 +8,12 @@
           <div class="card shadow-sm">
             <img src="{{ product.image | media_filter }}">
             <div class="card-body">
-              <p class="card-text"> Name: {{ product.name }} </p>
-              <p> Description: {{ product.description }} </p>
-              <p class="card-text"> Price: {{ product.price }} </p>
-              <p class="card-text"> Category: {{ product.category }} </p>
-              <p class="card-text"> created_at: {{ product.price }} </p>
-              <p class="card-text"> updated_at: {{ product.price }} </p>
+              <p class="card-text"> Name: {{ object.name }} </p>
+              <p> Description: {{ object.description }} </p>
+              <p class="card-text"> Price: {{ object.price }} </p>
+              <p class="card-text"> Category: {{ object.category }} </p>
+              <p class="card-text"> created_at: {{ object.price }} </p>
+              <p class="card-text"> updated_at: {{ object.price }} </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
 
