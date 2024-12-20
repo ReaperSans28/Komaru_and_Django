@@ -1,0 +1,28 @@
+{% extends 'komaru_blog/base_komaru.html' %}
+{% load komaru_tags %}
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        {% for post in object_list %}
+        <div class="col-6">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <h2 class="card-title pricing-card-title">{{ post.name }}</h2>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li class="text-center">{{ post.description | truncatechars:100}}</li>
+                    </ul>
+                    <img src="{{ post.image | media_filter }}" class="img-fluid" style="height: 360px;">
+
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="{% url 'komaru_blog:posts_detail' post.pk %}" role="button">Посмотреть</a>
+                        <a class="btn btn-primary" href="{% url 'komaru_blog:posts_update' post.pk %}" role="button">Изменить</a>
+                        <a class="btn btn-danger" href="{% url 'komaru_blog:posts_delete' post.pk %}" role="button">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}
