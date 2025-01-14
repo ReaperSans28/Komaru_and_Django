@@ -24,11 +24,9 @@ class Product(models.Model):
     name = models.CharField(
         max_length=100,
         verbose_name="Наименование",
-        help_text="Введите наименование товара",
     )
     description = models.TextField(
         verbose_name="Описание",
-        help_text="Введите описание категории",
         blank=True,
         null=True,
     )
@@ -37,31 +35,27 @@ class Product(models.Model):
         blank=True,
         null=True,
         verbose_name="Изображение",
-        help_text="Вставьте изображение товара",
     )
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
         verbose_name="Наименование категории",
-        help_text="Введите наименование категории",
         null=True,
         blank=True,
         related_name="category",
     )
     price = models.CharField(
-        max_length=100, verbose_name="Цена", help_text="Введите цену товара"
+        max_length=100, verbose_name="Цена"
     )
     created_at = models.DateField(
         blank=True,
         null=True,
         verbose_name="Дата создания",
-        help_text="Введите дату создания",
     )
     updated_at = models.DateField(
         blank=True,
         null=True,
         verbose_name="Дата последнего изменения",
-        help_text="Введите дату последнего изменения",
     )
 
     class Meta:
