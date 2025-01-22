@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import CustomUser
+
 
 class Category(models.Model):
     name = models.CharField(
@@ -59,6 +61,13 @@ class Product(models.Model):
     )
     was_publication = models.BooleanField(
         default=True, verbose_name="Опубликован ли"
+    )
+    owner = models.ForeignKey(
+        CustomUser,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name="Владелец"
     )
 
     class Meta:

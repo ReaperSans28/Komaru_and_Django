@@ -1,7 +1,9 @@
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, BooleanField
+from django.contrib.auth.forms import UserCreationForm
 
 from catalog.models import Product
+from users.models import CustomUser
 
 invalid_words = ["казино", "криптовалюта", "крипта", "биржа", "дешево", "бесплатно", "обман", "полиция", "радар"]
 
@@ -47,3 +49,9 @@ class ProductModeratorForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Product
         fields = ("was_publication",)
+
+
+class RegisterForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = UserCreationForm.Meta.fields + ("email", )

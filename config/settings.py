@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 import os
 from pathlib import Path
@@ -98,3 +99,5 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+LOGIN_REDIRECT_URL = reverse_lazy("catalog:profile")
