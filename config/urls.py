@@ -7,6 +7,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("catalog.urls", namespace="catalog")),
     path("komaru_blog/", include("komaru_blog.urls", namespace="komaru_blog")),
+
 ]
 
 if settings.DEBUG:

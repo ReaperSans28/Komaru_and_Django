@@ -41,3 +41,9 @@ class ProductForm(StyleFormMixin, ModelForm):
         description = self.cleaned_data.get('description', '')
         validate_disallowed_words(description)
         return description
+
+
+class ProductModeratorForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        fields = ("was_publication",)
