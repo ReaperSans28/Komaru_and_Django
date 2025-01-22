@@ -1,5 +1,6 @@
 from django.db import models
 
+from django_currentuser.middleware import get_current_user
 from users.models import CustomUser
 
 
@@ -64,8 +65,8 @@ class Product(models.Model):
     )
     owner = models.ForeignKey(
         CustomUser,
+        default=CustomUser.email,
         on_delete=models.SET_NULL,
-        blank=True,
         null=True,
         verbose_name="Владелец"
     )
@@ -76,6 +77,7 @@ class Product(models.Model):
         ordering = ["description", "name"]
         permissions = [
             ("can_unpublish_product", "Can unpublish product"),
+            ("can_delete_product", "Can delete product")
         ]
 
     def __str__(self):
