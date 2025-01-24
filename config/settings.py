@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     "catalog",
     "komaru_blog",
     "users",
-
 ]
 
 MIDDLEWARE = [
@@ -35,7 +34,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'django_currentuser.middleware.ThreadLocalUserMiddleware',
+    "django_currentuser.middleware.ThreadLocalUserMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -99,6 +98,6 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = "users.CustomUser"
 
 LOGIN_REDIRECT_URL = reverse_lazy("catalog:profile")

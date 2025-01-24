@@ -47,9 +47,7 @@ class Product(models.Model):
         blank=True,
         related_name="category",
     )
-    price = models.CharField(
-        max_length=100, verbose_name="Цена"
-    )
+    price = models.CharField(max_length=100, verbose_name="Цена")
     created_at = models.DateField(
         blank=True,
         null=True,
@@ -60,15 +58,13 @@ class Product(models.Model):
         null=True,
         verbose_name="Дата последнего изменения",
     )
-    was_publication = models.BooleanField(
-        default=True, verbose_name="Опубликован ли"
-    )
+    was_publication = models.BooleanField(default=True, verbose_name="Опубликован ли")
     owner = models.ForeignKey(
         CustomUser,
         default=CustomUser.email,
         on_delete=models.SET_NULL,
         null=True,
-        verbose_name="Владелец"
+        verbose_name="Владелец",
     )
 
     class Meta:
@@ -77,7 +73,7 @@ class Product(models.Model):
         ordering = ["description", "name"]
         permissions = [
             ("can_unpublish_product", "Can unpublish product"),
-            ("can_delete_product", "Can delete product")
+            ("can_delete_product", "Can delete product"),
         ]
 
     def __str__(self):

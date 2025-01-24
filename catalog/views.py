@@ -8,7 +8,8 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView, FormView,
+    DeleteView,
+    FormView,
 )
 
 from catalog.forms import ProductForm, ProductModeratorForm, RegisterForm
@@ -44,9 +45,11 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_form_class(self):
         user = self.request.user
-        if user == self.object.owner:
+        if user == self.object.owner or user.has_perm("catalog.update_product"):
             return ProductForm
-        if user.has_perm("catalog.can_unpublish_product") and user.has_perm("catalog.delete_product"):
+        if user.has_perm("catalog.can_unpublish_product") and user.has_perm(
+            "catalog.delete_product"
+        ):
             return ProductModeratorForm
         raise PermissionDenied
 
@@ -63,7 +66,7 @@ def profile_view(request):
 
 class RegisterView(FormView):
     form_class = RegisterForm
-    template_name = 'registration/register.html'
+    template_name = "registration/register.html"
     success_url = reverse_lazy("catalog:profile")
 
     def form_valid(self, form):

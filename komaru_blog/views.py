@@ -53,7 +53,7 @@ class PostUpdateView(UpdateView):
     success_url = reverse_lazy("komaru_blog:posts_list")
 
     def get_success_url(self):
-        return reverse('komaru_blog:posts_delete', args=[self.kwargs.get('pk')])
+        return reverse("komaru_blog:posts_delete", args=[self.kwargs.get("pk")])
 
 
 class PostDeleteView(DeleteView):
