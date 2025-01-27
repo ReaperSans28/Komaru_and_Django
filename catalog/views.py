@@ -32,21 +32,15 @@ class ProductDetailView(DetailView):
     model = Product
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(CreateView, LoginRequiredMixin):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("catalog:products_list")
 
-    # def form_valid(self, form):
-    #     self.object = form.save()
-    #     form.instance.owner = self.request.user
-    #     self.object.save()
-    #     return super().form_valid(form)
-
     def form_valid(self, form):
-        self.object = form.save()
-        self.object.owner = self.request.user
-        self.object.save()
+        model = form.save()
+        model.owner = self.request.user
+        model.save()
         return super().form_valid(form)
 
 

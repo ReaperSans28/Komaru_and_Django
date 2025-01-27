@@ -1,7 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, BooleanField
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import redirect, render
 
 from catalog.models import Product
 from users.models import CustomUser
@@ -34,23 +33,11 @@ def validate_disallowed_words(value):
         raise ValidationError("ОСУЖДАЮ.")
 
 
-# def create_product(request):
-#     if request.method == "POST":
-#         form = ProductForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             product = form.save(commit=False)
-#             product.owner = request.user
-#             product.save()
-#             return redirect('product_list')
-#     else:
-#         form = ProductForm()
-#     return render(request, 'product_form.html', {'form': form})
-
-
 class ProductForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'image', 'category', 'price', "created_at", "updated_at", "was_publication", "owner"]
+        fields = "__all__"
+        exclude = ("owner",)
 
     def clean_price(self):
         price = self.cleaned_data["price"]

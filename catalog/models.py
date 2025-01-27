@@ -61,7 +61,6 @@ class Product(models.Model):
     was_publication = models.BooleanField(default=True, verbose_name="Опубликован ли")
     owner = models.ForeignKey(
         CustomUser,
-        default=CustomUser.email,
         on_delete=models.SET_NULL,
         null=True,
         verbose_name="Владелец",
