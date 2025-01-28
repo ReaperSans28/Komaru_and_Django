@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class KomaruBlogConfig(AppConfig):
+class BlogConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "komaru_blog"
+    name = "blog"

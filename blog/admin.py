@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from komaru_blog.models import Post
+from blog.models import Post
 
 
 @admin.register(Post)
