@@ -1,12 +1,13 @@
 from django.db import models
 
-from django_currentuser.middleware import get_current_user
 from users.models import CustomUser
 
 
 class Category(models.Model):
     name = models.CharField(
-        max_length=100, verbose_name="Название", help_text="Введите название категории"
+        max_length=100,
+        verbose_name="Название",
+        help_text="Введите название категории"
     )
     description = models.TextField(
         verbose_name="Описание",
@@ -18,6 +19,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
@@ -37,28 +39,34 @@ class Product(models.Model):
         upload_to="product/image",
         blank=True,
         null=True,
-        verbose_name="Изображение",
     )
     category = models.ForeignKey(
         Category,
-        on_delete=models.SET_NULL,
         verbose_name="Наименование категории",
         null=True,
         blank=True,
         related_name="category",
+        on_delete=models.SET_NULL,
     )
     price = models.CharField(max_length=100, verbose_name="Цена")
     created_at = models.DateField(
         blank=True,
         null=True,
         verbose_name="Дата создания",
+        auto_now=True,
+        editable=False,
     )
     updated_at = models.DateField(
         blank=True,
         null=True,
         verbose_name="Дата последнего изменения",
+        auto_now=True,
+        editable=False,
     )
-    was_publication = models.BooleanField(default=True, verbose_name="Опубликован ли")
+    was_publication = models.BooleanField(
+        default=True,
+        verbose_name="Опубликован ли"
+    )
     owner = models.ForeignKey(
         CustomUser,
         on_delete=models.SET_NULL,
@@ -71,8 +79,8 @@ class Product(models.Model):
         verbose_name_plural = "Товары"
         ordering = ["description", "name"]
         permissions = [
-            ("can_unpublish_product", "Can unpublish product"),
-            ("can_delete_product", "Can delete product"),
+            ("can_unpublish_product", "Может снять товар с публикации"),
+            ("can_delete_product", "Может удалить товар"),
         ]
 
     def __str__(self):
