@@ -1,43 +1,15 @@
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm, BooleanField
-from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
 from catalog.models import Product
-from users.models import CustomUser
-
-invalid_words = [
-    "казино",
-    "криптовалюта",
-    "крипта",
-    "биржа",
-    "дешево",
-    "бесплатно",
-    "обман",
-    "полиция",
-    "радар",
-]
+from catalog.utils import validate_disallowed_words
+from config.forms import StyleFormMixin
 
 
-class StyleFormMixin:
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for fild_name, fild in self.fields.items():
-            if isinstance(fild, BooleanField):
-                fild.widget.attrs["class"] = "form-check-input"
-            else:
-                fild.widget.attrs["class"] = "form-control"
-
-
-def validate_disallowed_words(value):
-    if any(disallowed_word in value.lower() for disallowed_word in invalid_words):
-        raise ValidationError("ОСУЖДАЮ.")
-
-
-class ProductForm(StyleFormMixin, ModelForm):
+class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = "__all__"
-        exclude = ("owner",)
+        fields = ["name", "description", "image", "price", "category", "is_public"]
 
     def clean_price(self):
         price = self.cleaned_data["price"]
@@ -56,13 +28,7 @@ class ProductForm(StyleFormMixin, ModelForm):
         return description
 
 
-class ProductModeratorForm(StyleFormMixin, ModelForm):
+class ProductModeratorForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = ("was_publication",)
-
-
-class RegisterForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = CustomUser
-        fields = UserCreationForm.Meta.fields + ("email",)
+        fields = ["is_public",]
