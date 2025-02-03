@@ -1,5 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="{% static '/css/register.css' %}">
@@ -10,7 +9,6 @@
     <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<!-- main -->
 <div class="wrapper">
     <form class="p-3 mt-3" method="post">
         {% csrf_token %}
@@ -39,8 +37,6 @@
         <input class="btn mt-3" type="submit" value="Регистрация">
     </form>
     <p>Уже есть аккаунт? <a href="/users/login/"> Войдите сейчас!</a></p>
-</div>
-</div>
 </div>
 </body>
 </html>
